@@ -1,0 +1,59 @@
+{
+    "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json", 
+    "AuthorDetails": {
+      "Name": "Adriano Fabri",
+      "Description": "A full stack developer with a particular focus on .NET, Angular and NodeJS development.",
+      "Url": "https://www.linkedin.com/in/fabriadriano/",
+      "ImageUrl": "https://avatars.githubusercontent.com/u/6714121?s=400&u=154a98a8bd78a87af042628f2c6b0ef1e8a9d0ea&v=4"
+    },
+    "Category": "Developer Tools",
+    "Description": "Azure Blob media storage provider for Umbraco 15/16/17 (.NET 9/10). Built on Umbraco.StorageProviders.AzureBlob and Umbraco.StorageProviders.AzureBlob.ImageSharp, it configures Azure Blob media filesystem and ImageSharp cache with auto-composition (no Program.cs changes required), startup fail-fast checks (required settings, connectivity, container checks) and configurable ImageSharp cache-retention cleanup.",
+    "DocumentationUrl": "https://github.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage?tab=readme-ov-file#readme-ov-file",
+    "LicenseTypes": [ "Free" ],
+    "LicensesUrl": "https://github.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage?tab=readme-ov-file#MIT-1-ov-file",
+    "IssueTrackerUrl": "https://github.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage/issues",
+    "PackageType": "Package",
+    "PackageUrl": "https://www.nuget.org/packages/AF.Umbraco.Azure.Blob.Media.Storage/",
+    "Screenshots": [
+      {
+        "ImageUrl": "https://raw.githubusercontent.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage/main/assets/Umbraco-Media-Root.png",
+        "Caption": "Umbraco backoffice media section with uploaded images stored in Azure Blob"
+      },
+      {
+        "ImageUrl": "https://raw.githubusercontent.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage/main/assets/Umbraco-Media-Details.png",
+        "Caption": "Umbraco backoffice media section - image details view"
+      },
+      {
+        "ImageUrl": "https://raw.githubusercontent.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage/main/assets/Azurite-Uploaded-Image.png",
+        "Caption": "Azurite container - Uploaded image view"
+      },
+      {
+        "ImageUrl": "https://raw.githubusercontent.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage/main/assets/Azurite-Cache.png",
+        "Caption": "Azurite container - Cache folder with cached images"
+      },
+      {
+        "ImageUrl": "https://raw.githubusercontent.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage/main/assets/Azurite-Root.png",
+        "Caption": "Azurite container - Root folder"
+      },
+      {
+        "ImageUrl": "https://raw.githubusercontent.com/afabri73/AF.Umbraco.Azure.Blob.Media.Storage/main/assets/Azurite-Media.png",
+        "Caption": "Azurite container - Media folder with uploaded images"
+      }
+    ],
+    "Tags": [
+      "Media",
+      "Azure",
+      "AzureBlob",
+      "Blob",
+      "FileSystemProvider",
+      "Images",
+      "Storage",
+      "Umbraco",
+      "Umbraco 15",
+      "Umbraco 16",
+      "Umbraco 17",
+      ".NET 9",
+      ".NET 10"
+    ],
+    "Title": "AF Umbraco Azure Blob Media Storage"
+  }
