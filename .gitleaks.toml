@@ -1,13 +1,8 @@
-title = "AF.Umbraco.Azure.Blob.Media.Storage Gitleaks Config"
-
 [extend]
 useDefault = true
 
 [[allowlists]]
-description = "Ignore generated and build artifacts"
-paths = [
-  '''^src/.*/bin/''',
-  '''^src/.*/obj/''',
-  '''^msbuild\.log$''',
-  '''^msbuild\.binlog$'''
+description = "Historical false positive: public Azurite default account key in smoke script (already removed)."
+commits = [
+  "856faaa6bd1a10c001401617545accba7555a585"
 ]

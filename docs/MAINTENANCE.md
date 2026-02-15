@@ -29,7 +29,7 @@ When upgrading, verify compatibility across all supported Umbraco majors (15/16/
 
 1. Startup checks required config for both `Media` and `ImageSharp`.
 2. Startup connectivity check passes/fails correctly.
-3. Container ensure logic respects `CreateContainerIfNotExists` resolution.
+3. Container ensure logic creates missing containers during startup checks.
 4. Cache-retention cleanup respects `ImageSharp:CacheRetention` settings.
 5. ImageSharp cache writes under expected container/path layout.
 6. Smoke endpoints are available only when `AF_SMOKE_TESTS=1`.

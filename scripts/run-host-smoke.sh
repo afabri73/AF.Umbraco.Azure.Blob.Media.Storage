@@ -14,11 +14,28 @@ project_dir="$(dirname "$project_path")"
 local_settings="$project_dir/appsettings.Local.json"
 log_file="$project_dir/smoke-${tfm}.log"
 pid_file="$project_dir/smoke-${tfm}.pid"
-default_azurite_cs="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;"
+default_azurite_cs="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=YOUR-AZURITE-ACCOUNT-KEY;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;"
 connection_string="${AZURE_BLOB_CONNECTION_STRING:-$default_azurite_cs}"
-default_db_dsn='Server=localhost;Database=UMBRACO_17_FOR_PACKAGES;User ID=umbraco_packages_user;Password=W_3putJ_NteP_iH;Trust Server Certificate=True;Multiple Active Result Sets=True;Encrypt=True'
+default_db_dsn='Server=localhost;Database=UMBRACO_17_FOR_PACKAGES;User ID=umbraco_packages_user;Password=YOUR-SQL-PASSWORD;Trust Server Certificate=True;Multiple Active Result Sets=True;Encrypt=True'
 db_dsn="${UMBRACO_DB_DSN:-$default_db_dsn}"
 db_provider="${UMBRACO_DB_PROVIDER:-Microsoft.Data.SqlClient}"
+default_unattended_password="YOUR-UNATTENDED-PASSWORD"
+unattended_password="${UMBRACO_UNATTENDED_PASSWORD:-$default_unattended_password}"
+
+if [[ "$connection_string" == *"YOUR-AZURITE-ACCOUNT-KEY"* ]]; then
+  echo "Set AZURE_BLOB_CONNECTION_STRING with a valid Azure Blob or Azurite key before running smoke tests." >&2
+  exit 1
+fi
+
+if [[ "$db_dsn" == *"YOUR-SQL-PASSWORD"* ]]; then
+  echo "Set UMBRACO_DB_DSN with a valid SQL connection string before running smoke tests." >&2
+  exit 1
+fi
+
+if [[ "$unattended_password" == "YOUR-UNATTENDED-PASSWORD" ]]; then
+  echo "Set UMBRACO_UNATTENDED_PASSWORD before running smoke tests." >&2
+  exit 1
+fi
 
 cleanup() {
   if [[ -f "$pid_file" ]]; then
@@ -46,7 +63,7 @@ cat > "$local_settings" <<JSON
         "UpgradeUnattended": true,
         "UnattendedUserName": "smoke-admin",
         "UnattendedUserEmail": "smoke@example.local",
-        "UnattendedUserPassword": "SmokePassword123!"
+        "UnattendedUserPassword": "${unattended_password}"
       }
     },
     "Storage": {

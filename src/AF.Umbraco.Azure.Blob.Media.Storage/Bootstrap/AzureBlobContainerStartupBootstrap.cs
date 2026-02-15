@@ -12,7 +12,7 @@ namespace AF.Umbraco.Azure.Blob.Media.Storage.Bootstrap;
 /// <summary>
 /// Performs startup fail-fast validation for Azure Blob configuration and connectivity.
 /// Application startup is blocked when required settings are missing, storage is unreachable,
-/// or required containers are unavailable while auto-create is disabled.
+/// or required containers cannot be ensured.
 /// </summary>
 internal sealed class AzureBlobStartupConnectivityHostedService(
     IConfiguration configuration,
@@ -73,15 +73,10 @@ internal sealed class AzureBlobStartupConnectivityHostedService(
             throw new InvalidOperationException(message);
         }
 
-        bool createContainerIfNotExists = section.GetValue<bool?>("CreateContainerIfNotExists")
-            ?? configuration.GetValue<bool?>("Umbraco:Storage:AzureBlob:CreateContainerIfNotExists")
-            ?? true;
-
         return new AzureBlobSectionConfiguration(
             sectionName,
             connectionString,
-            containerName,
-            createContainerIfNotExists);
+            containerName);
     }
 
     private async Task EnsureConnectionAsync(AzureBlobSectionConfiguration sectionConfiguration, CancellationToken cancellationToken)
@@ -115,28 +110,10 @@ internal sealed class AzureBlobStartupConnectivityHostedService(
                 sectionConfiguration.ConnectionString,
                 sectionConfiguration.ContainerName);
 
-            if (sectionConfiguration.CreateContainerIfNotExists)
-            {
-                await containerClient.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
-
-                logger.LogInformation(
-                    "{LogPrefix} Ensured Azure Blob container '{ContainerName}' exists for section '{SectionName}'.",
-                    LogPrefix,
-                    sectionConfiguration.ContainerName,
-                    sectionConfiguration.SectionName);
-
-                return;
-            }
-
-            Response<bool> containerExistsResponse = await containerClient.ExistsAsync(cancellationToken);
-            if (!containerExistsResponse.Value)
-            {
-                throw new InvalidOperationException(
-                    $"{LogPrefix} Container '{sectionConfiguration.ContainerName}' does not exist for section '{sectionConfiguration.SectionName}' and auto-create is disabled. Application startup is blocked.");
-            }
+            await containerClient.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
 
             logger.LogInformation(
-                "{LogPrefix} Azure Blob container '{ContainerName}' exists for section '{SectionName}' (auto-create disabled).",
+                "{LogPrefix} Ensured Azure Blob container '{ContainerName}' exists for section '{SectionName}'.",
                 LogPrefix,
                 sectionConfiguration.ContainerName,
                 sectionConfiguration.SectionName);
@@ -156,12 +133,10 @@ internal sealed class AzureBlobStartupConnectivityHostedService(
     private sealed class AzureBlobSectionConfiguration(
         string sectionName,
         string connectionString,
-        string containerName,
-        bool createContainerIfNotExists)
+        string containerName)
     {
         public string SectionName { get; } = sectionName;
         public string ConnectionString { get; } = connectionString;
         public string ContainerName { get; } = containerName;
-        public bool CreateContainerIfNotExists { get; } = createContainerIfNotExists;
     }
 }

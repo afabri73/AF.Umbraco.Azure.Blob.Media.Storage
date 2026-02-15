@@ -52,7 +52,6 @@ Optional keys:
 
 - `ContainerRootPath`
 - `VirtualPath`
-- `CreateContainerIfNotExists`
 
 ## Cache Retention Cleanup
 
@@ -94,7 +93,6 @@ Without explicit isolation, media and cache paths can overlap.
   "Umbraco": {
     "Storage": {
       "AzureBlob": {
-        "CreateContainerIfNotExists": true,
         "Media": {
           "ConnectionString": "DefaultEndpointsProtocol=http;AccountName=azurite-storage;AccountKey=...;BlobEndpoint=http://127.0.0.1:10000/azurite-storage;",
           "ContainerName": "umbraco17",

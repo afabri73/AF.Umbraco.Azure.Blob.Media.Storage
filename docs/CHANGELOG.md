@@ -16,7 +16,7 @@
 - Startup fail-fast checks implemented via hosted service:
   - required section/key checks
   - storage account connectivity check
-  - container ensure/existence check with configurable auto-create
+  - container ensure/existence check
 - Added configurable ImageSharp cache-retention cleanup hosted service.
   - configuration path: `Umbraco:Storage:AzureBlob:ImageSharp:CacheRetention`
   - supports normal mode (`Enabled`, `NumberOfDays`) and test mode (`TestModeEnable`, `TestModeSweepSeconds`, `TestModeMaxAgeMinutes`)
@@ -25,7 +25,7 @@
 ### Configuration Clarity
 
 - Clarified required keys (`ConnectionString`, `ContainerName`) for both `Media` and `ImageSharp`.
-- Clarified optional keys (`ContainerRootPath`, `VirtualPath`, `CreateContainerIfNotExists`).
+- Clarified optional keys (`ContainerRootPath`, `VirtualPath`).
 - Added explicit guidance for:
   - separate-container topology (recommended)
   - shared-container topology with explicit root isolation

@@ -39,8 +39,7 @@ At compose time:
 2. Check required keys (`ConnectionString`, `ContainerName`).
 3. Verify account connectivity (`GetPropertiesAsync`).
 4. Ensure media/cache containers exist.
-   - create when auto-create enabled
-   - fail when disabled and missing
+   - create when missing
 5. Continue boot only on success.
 
 ## Storage Layout Behavior

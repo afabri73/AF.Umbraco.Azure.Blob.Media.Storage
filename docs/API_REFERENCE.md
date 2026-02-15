@@ -34,14 +34,8 @@ Responsibilities:
   - `ConnectionString`
   - `ContainerName`
 - checks connectivity with `BlobServiceClient.GetPropertiesAsync`
-- ensures containers exist with `BlobContainerClient.CreateIfNotExistsAsync` when auto-create is enabled
+- ensures containers exist with `BlobContainerClient.CreateIfNotExistsAsync`
 - fails startup when requirements are not met
-
-Container auto-create setting resolution:
-
-1. `Umbraco:Storage:AzureBlob:{Section}:CreateContainerIfNotExists`
-2. `Umbraco:Storage:AzureBlob:CreateContainerIfNotExists`
-3. default `true`
 
 Log prefix: `[AFUABMS]`
 

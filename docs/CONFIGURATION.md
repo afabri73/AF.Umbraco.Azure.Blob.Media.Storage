@@ -22,22 +22,12 @@ If one section or one required key is missing, startup fails.
 
 - `ContainerRootPath`
 - `VirtualPath`
-- `CreateContainerIfNotExists`
 - `CacheRetention` (ImageSharp section only)
 
 ### Notes
 
 - `ContainerRootPath` isolates blob prefixes inside a container.
 - `VirtualPath` controls URL path mapping used by the filesystem.
-- `CreateContainerIfNotExists` can be set per section or globally.
-
-## `CreateContainerIfNotExists` Resolution
-
-1. `Umbraco:Storage:AzureBlob:Media:CreateContainerIfNotExists` or `...:ImageSharp:...`
-2. `Umbraco:Storage:AzureBlob:CreateContainerIfNotExists`
-3. default `true`
-
-When final value is `false`, missing containers block startup.
 
 ## ImageSharp Cache Retention
 
@@ -118,7 +108,6 @@ Without explicit isolation, media/cache overlap may occur.
   "Umbraco": {
     "Storage": {
       "AzureBlob": {
-        "CreateContainerIfNotExists": true,
         "Media": {
           "ConnectionString": "DefaultEndpointsProtocol=http;AccountName=azurite-storage;AccountKey=...;BlobEndpoint=http://127.0.0.1:10000/azurite-storage;",
           "ContainerName": "umbraco17",

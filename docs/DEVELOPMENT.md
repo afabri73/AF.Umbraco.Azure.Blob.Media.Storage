@@ -32,8 +32,8 @@ Configure `appsettings.Local.json` for selected host before run.
 
 1. Separate containers with minimal settings.
 2. Shared container with explicit `ContainerRootPath` isolation.
-3. Auto-create disabled with pre-existing containers.
-4. Auto-create disabled with missing container (startup should fail).
+3. Validate startup checks with pre-existing containers.
+4. Validate startup checks with missing containers (should be auto-created).
 5. Media upload in backoffice (standard Umbraco behavior).
 
 ## Smoke Endpoints
@@ -77,7 +77,7 @@ Typical fail-fast causes:
 - missing `Media` or `ImageSharp` section
 - missing `ConnectionString` or `ContainerName`
 - invalid storage credentials/endpoint
-- missing container when `CreateContainerIfNotExists=false`
+- invalid storage credentials/endpoint preventing container checks
 
 ## Coding Notes
 
